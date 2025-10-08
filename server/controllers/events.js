@@ -11,7 +11,7 @@ const getAllEvents = async (req, res) => {
 };
 
 // retrieve a single event based on its unique ID. 
-const getEventById = async (req, res) => {
+const getEventsById = async (req, res) => {
     try {
         const selectQuery = `
         SELECT *
@@ -26,8 +26,23 @@ const getEventById = async (req, res) => {
     }
 };
 
+//get location from event id
+const getEventsByLocationId = async (req, res) => {
+    try {
+        const selectQuery = `
+            SELECT * FROM events 
+            WHERE location = $1;
+        `;
+        const locationId = req.params.id;
+        const results = await pool.query(selectQuery, [locationId]);
+        res.status(200).json(results.rows);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+};
 
 export default {
     getAllEvents,
-    getEventById
+    getEventsById,
+    getEventsByLocationId
 };

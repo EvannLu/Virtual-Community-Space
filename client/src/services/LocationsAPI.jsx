@@ -1,5 +1,5 @@
 // Define the base URL for your locations API
-const API_URL = 'http://localhost:3001/api/locations';
+const API_URL = 'http://localhost:3000/api/locations';
 
 /**
  * Fetches all locations from the backend API.
@@ -27,7 +27,7 @@ export const getAllLocations = async () => {
  * @param {string | number} id The ID of the location to fetch.
  * @returns {Promise<Object | null>} A promise that resolves to the location object or null.
  */
-export const getLocationById = async (id) => {
+export const getLocationsById = async (id) => {
     try {
         const response = await fetch(`${API_URL}/${id}`);
 
@@ -46,5 +46,5 @@ export const getLocationById = async (id) => {
 
 export default {
     getAllLocations,
-    getLocationById,
+    getLocationsById,
 };

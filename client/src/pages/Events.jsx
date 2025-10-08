@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Event from '../components/Event';
 import '../css/Event.css';
+// 1. Import the API service
+import EventsAPI from '../services/EventsAPI'
 
 const EventsPage = () => {
     const [events, setEvents] = useState([]);
@@ -9,15 +11,13 @@ const EventsPage = () => {
     useEffect(() => {
         const fetchAllEvents = async () => {
             try {
-                const response = await fetch('/api/events');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
+                // Use the imported API function
+                const data = await EventsAPI.getAllEvents(); 
                 setEvents(data);
                 console.log("Fetched events:", data);
             } catch (error) {
-                console.error("Error fetching all events:", error);
+                // The API function already logs the error, but we can catch it here too
+                console.error("Failed to load events in component:", error);
             } finally {
                 setLoading(false);
             }
@@ -40,10 +40,6 @@ const EventsPage = () => {
                         <Event
                             key={event.id}
                             id={event.id}
-                            title={event.title}
-                            date={event.date}
-                            time={event.time}
-                            image={event.image}
                         />
                     ))
                 ) : (

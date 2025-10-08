@@ -11,21 +11,27 @@ const App = () => {
       path: '/',
       element: <Locations />
     },
+    /*
+    why <LocationEvents id={#} /> instead of <LocationEvents index={#} />
+    because the router does not pass props like index automatically. 
+    We have to explicitly pass the location ID as a prop to the component.
+    The id corresponds to the location's ID in the database.
+    */
     {
       path: '/echolounge',
-      element: <LocationEvents index={1} />
+      element: <LocationEvents id={1} />
     },
     {
       path: '/houseofblues',
-      element: <LocationEvents index={2} />
+      element: <LocationEvents id={2} />
     },
     {
       path: '/pavilion',
-      element: <LocationEvents index={3} />
+      element: <LocationEvents id={3} />
     },
     {
       path: '/americanairlines',
-      element: <LocationEvents index={4} />
+      element: <LocationEvents id={4} />
     },
     {
       path: '/events',
